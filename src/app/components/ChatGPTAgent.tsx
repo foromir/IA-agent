@@ -3,15 +3,15 @@ import { Button } from '@/app/components/ui/button';
 import { Input } from '@/app/components/ui/input';
 import { Card } from '@/app/components/ui/card';
 import { useState } from 'react';
+import { Message } from '../types/chart';
 
-interface Message {
-    role: 'user' | 'assistant';
-    content: string;
-    timestamp?: Date;
+
+interface ChatGPTAgentProps {
+    setMessages: React.Dispatch<React.SetStateAction<Message[]>>;
+    messages: Message[];
 }
 
-
-export default function ChatGPTAgent({setMessages, messages}: {setMessages: (messages: Message[]) => void, messages: Message[]}) {
+const ChatGPTAgent: React.FC<ChatGPTAgentProps> = ({setMessages, messages}) => {
     const [isLoading, setIsLoading] = useState(false);
     const [input, setInput] = useState('');
 
@@ -123,3 +123,5 @@ export default function ChatGPTAgent({setMessages, messages}: {setMessages: (mes
         </Card>
     );
 } 
+
+export default ChatGPTAgent;

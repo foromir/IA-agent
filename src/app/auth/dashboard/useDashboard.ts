@@ -1,10 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Summary } from '@/app/types/summary';
-interface Message {
-    role: 'user' | 'assistant';
-    content: string;
-    timestamp?: Date;
-}
+import { Message } from '@/app/types/chart';
 
 const useDashboard = () => {
     const [messages, setMessages] = useState<Message[]>([]);

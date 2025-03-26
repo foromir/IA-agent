@@ -30,7 +30,7 @@ export async function POST() {
 
         // Format chat history for the summary request
         const chatContent = chatHistory.messages
-            .map(msg => `${msg.role}: ${msg.content}`)
+            .map((msg: { role: string; content: string; }) => `${msg.role}: ${msg.content}`)
             .join('\n');
 
         const completion = await openai.chat.completions.create({

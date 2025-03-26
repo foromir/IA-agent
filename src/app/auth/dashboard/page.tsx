@@ -12,8 +12,7 @@ export default async function DashboardPage() {
 
     const session = await auth();
 
-
     return (
-        <Dashboard session={session}/>
+        <Dashboard session={session!}/>
     );
 }
