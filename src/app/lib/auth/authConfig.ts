@@ -35,11 +35,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   },
   // basePath: "/login",
   callbacks: {
-    jwt({ account, token, user, profile, session }) {
+    jwt({ token, user, }) { // profile, session, account
       if (user) token.user = user;
       return token;
     },
     session({ session, token }) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       session.user = token.user as any;
       return session;
     },

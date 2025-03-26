@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-
+import { Summary } from '@/app/types/summary';
 interface Message {
     role: 'user' | 'assistant';
     content: string;
@@ -9,7 +9,7 @@ interface Message {
 const useDashboard = () => {
     const [messages, setMessages] = useState<Message[]>([]);
     const [summary, setSummary] = useState<string>('');
-    const [summaries, setSummaries] = useState<string[]>([]);
+    const [summaries, setSummaries] = useState<Summary[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     useEffect(() => {
         const loadChatHistory = async () => {

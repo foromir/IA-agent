@@ -9,7 +9,7 @@ const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 });
 
-export async function POST(req: Request) {
+export async function POST() {
     try {
         const session = await auth();
         if (!session?.user?.id) {
@@ -81,7 +81,7 @@ export async function POST(req: Request) {
 }
 
 // GET endpoint to fetch summaries
-export async function GET(req: Request) {
+export async function GET() {
     try {
         const session = await auth();
         if (!session?.user?.id) {

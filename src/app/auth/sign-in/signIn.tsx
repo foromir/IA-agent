@@ -48,7 +48,7 @@ const SignIn: React.FC = () => {
               Sign in to your account
             </h2>
             <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-              Don't have an account?{' '}
+              Don not have an account?
               <a
                 href="/auth/sign-up"
                 className="font-medium text-blue-600 hover:text-blue-500"

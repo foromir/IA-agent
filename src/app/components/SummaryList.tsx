@@ -1,15 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-
-interface Summary {
-    _id: string;
-    userId: string;
-    content: string;
-    chatHistoryRef: string;
-    createdAt: string;
-    __v: number;
-}
+import { Summary } from '@/app/types/summary';
 
 interface SummaryListProps {
     summaries: Summary[];

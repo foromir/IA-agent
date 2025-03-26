@@ -4,8 +4,8 @@ import ChatGPTAgent from "@/app/components/ChatGPTAgent";
 import useDashboard from "./useDashboard";
 import { Button } from "@/app/components/ui/button";
 import SummaryList from "@/app/components/SummaryList";
-
-const Dashboard: React.FC = ({session}: {session: any}) => {
+import { Session } from "next-auth";
+const Dashboard: React.FC<{ session: Session }> = ({ session }) => {
     const { messages, setMessages, generateSummary,  summaries, deleteSummary ,isLoading} = useDashboard();
 
 
