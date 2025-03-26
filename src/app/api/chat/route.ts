@@ -46,7 +46,7 @@ export async function POST(req: Request) {
                     role: "system",
                     content: "You are a helpful assistant that provides clear and concise responses."
                 },
-                ...chatHistory.messages.map(msg => ({
+                ...chatHistory.messages.map((msg: { role: string; content: string; }) => ({
                     role: msg.role,
                     content: msg.content
                 }))
