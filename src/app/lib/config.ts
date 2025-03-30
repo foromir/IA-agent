@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import { GPTModel } from '@/app/types/config';
 
-const CONFIG_PATH = path.join(process.cwd(), 'config.yaml');
+const CONFIG_PATH = path.join(process.cwd(), 'src/app/lib/config.yaml');
 
 export interface Config {
     GENERAL: {
