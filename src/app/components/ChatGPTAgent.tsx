@@ -2,9 +2,8 @@
 import { Button } from '@/app/components/ui/button';
 import { Input } from '@/app/components/ui/input';
 import { Card } from '@/app/components/ui/card';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Message } from '../types/chart';
-
 
 interface ChatGPTAgentProps {
     setMessages: React.Dispatch<React.SetStateAction<Message[]>>;
@@ -14,6 +13,15 @@ interface ChatGPTAgentProps {
 const ChatGPTAgent: React.FC<ChatGPTAgentProps> = ({setMessages, messages}) => {
     const [isLoading, setIsLoading] = useState(false);
     const [input, setInput] = useState('');
+    const messagesEndRef = useRef<HTMLDivElement>(null);
+
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
+
+    useEffect(() => {
+        scrollToBottom();
+    }, [messages]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -84,6 +92,7 @@ const ChatGPTAgent: React.FC<ChatGPTAgentProps> = ({setMessages, messages}) => {
                             </div>
                         </div>
                     )}
+                    <div ref={messagesEndRef} />
                 </div>
                 <form onSubmit={handleSubmit} className="flex gap-3 mt-4">
                     <Input

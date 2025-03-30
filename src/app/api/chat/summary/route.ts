@@ -4,6 +4,8 @@ import connectDB from '@/app/lib/connectDB';
 import { ChatMessage } from '@/app/models/ChatMessage';
 import { Summary } from '@/app/models/Summary';
 import { auth } from '@/app/lib/auth/authConfig';
+import { readConfig } from '@/app/lib/config';
+import { GPTModel } from '@/app/types/gpt';
 
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
@@ -20,6 +22,7 @@ export async function POST() {
         }
 
         await connectDB();
+        const config = readConfig().SUMMARY;
         const chatHistory = await ChatMessage.findOne({ userId: session.user.id });
 
         if (!chatHistory || chatHistory.messages.length === 0) {
@@ -34,17 +37,22 @@ export async function POST() {
             .join('\n');
 
         const completion = await openai.chat.completions.create({
-            model: "gpt-4",
+            model: config?.model || GPTModel.GPT_4O,
             messages: [
                 {
                     role: "system",
-                    content: "Please provide a brief summary of the following conversation. Focus on the main topics and key points discussed."
+                    content: config?.system_prompt || "Please provide a brief summary of the following conversation. Focus on the main topics and key points discussed."
                 },
                 {
                     role: "user",
                     content: chatContent
                 }
             ],
+                temperature: config?.temperature || 0.7,
+                max_tokens: config?.max_tokens || 1000,
+                top_p: config?.top_p || 1,
+                frequency_penalty: config?.frequency_penalty || 0,
+                presence_penalty: config?.presence_penalty || 0,
         });
 
         const summaryContent = completion.choices[0].message.content;
